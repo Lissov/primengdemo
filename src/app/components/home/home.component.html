@@ -1,0 +1,178 @@
+<p-panel header="User Registration Form" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <p-accordion>
+        <p-accordionTab header="General Detail" [selected]="true">
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="Username">User Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" [(ngModel)]="user.UserName" pInputText placeholder="Username" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="mobile">Mobile Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"></i></span>
+                        </div>
+                        <p-inputMask [(ngModel)]="user.Mobile" mask="(999) 999-9999" placeholder="(999) 999-9999">
+                        </p-inputMask>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="Username">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-at"></i></span>
+                        </div>
+                        <input type="email" [(ngModel)]="user.Email" pInputText placeholder="Email" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="Username">DOB</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <p-calendar [(ngModel)]="user.DOB" [monthNavigator]="true" placeholder="DOB" mask="99/99/9999"
+                            [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="gender">Gender</label>
+                    <div class="ui-g" style="width:250px;margin-bottom:10px">
+                        <div class="ui-g-12">
+                            <p-radioButton name="gender" value="Male" label="Male" [(ngModel)]="user.Gender">
+                            </p-radioButton>
+                        </div>
+                        <div class="ui-g-12">
+                            <p-radioButton name="gender" value="Female" label="Female" [(ngModel)]="user.Gender">
+                            </p-radioButton>
+                        </div>
+                        <div class="ui-g-12">
+                            <p-radioButton name="gender" value="Other" label="Other" [(ngModel)]="user.Gender">
+                            </p-radioButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="hobbies">Hobbies</label>
+                    <div class="ui-g" style="width:250px;margin-bottom:10px">
+                        <div class="ui-g-12">
+                            <p-checkbox name="group2" value="Watching Movies" label="Watching Movies"
+                                [(ngModel)]="user.Hobbies"></p-checkbox>
+                        </div>
+                        <div class="ui-g-12">
+                            <p-checkbox name="group2" value="Travelling" label="Travelling" [(ngModel)]="user.Hobbies">
+                            </p-checkbox>
+                        </div>
+                        <div class="ui-g-12">
+                            <p-checkbox name="group2" value="Sports" label="Sports" [(ngModel)]="user.Hobbies">
+                            </p-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </p-accordionTab>
+        <p-accordionTab header="Experience Detail">
+            <p-table [value]="user.Experience" dataKey="Id" editMode="row">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Year</th>
+                        <th>Designation</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="rowData">
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="rowData.CompanyName" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.CompanyName}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="rowData.Year" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.Year}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="rowData.Designation"
+                                        [style]="{'width':'100%'}">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.Designation}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="text-align:center">
+                            <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                                class="ui-button-info" (click)="onRowEditInit(rowData)"></button>
+                            <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                                class="ui-button-success" style="margin-right: .5em"
+                                (click)="onRowEditSave(rowData)"></button>
+                            <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                                class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-accordionTab>
+        <p-accordionTab header="Educational Detail">
+            <p-table [value]="user.Education" dataKey="Id" editMode="row">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Institute Name</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Type</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-edu>
+                    <tr>
+                        <td>{{edu.InstituteName}}</td>
+                        <td>{{edu.Course}}</td>
+                        <td>{{edu.Year}}</td>
+                        <td>{{edu.Type}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-accordionTab>
+
+        <p-accordionTab header="Skills Detail">
+            <p-orderList [value]="user.Skills" [listStyle]="{'height':'250px'}" header="Skills" filter="filter" filterBy="Name"
+                filterPlaceholder="Filter by Name" dragdrop="true">
+                <ng-template let-skill pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                        <img src="assets/images/{{skill.path}}"
+                            style="display:inline-block;margin:2px 0 2px 2px" width="48">
+                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{skill.Name}}</div>
+                    </div>
+                </ng-template>
+            </p-orderList>
+        </p-accordionTab>
+    </p-accordion>
+</p-panel>
