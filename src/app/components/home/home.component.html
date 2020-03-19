@@ -1,3 +1,6 @@
+
+
+<a href="javascript:void(0)" (click)="scrollToElement(target)">Click Link</a>
 <p-panel header="User Registration Form" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
     <p-accordion>
         <p-accordionTab header="General Detail" [selected]="true">
@@ -6,10 +9,7 @@
                 <div class="col-sm-6">
                     <label for="Username">User Name</label>
                     <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-                        </div>
-                        <input type="text" [(ngModel)]="user.UserName" pInputText placeholder="Username" />
+                        <app-custom-input [(ngModel)]="value" id="target" #target></app-custom-input>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -175,4 +175,5 @@
             </p-orderList>
         </p-accordionTab>
     </p-accordion>
-</p-panel>
+    <button type="button" (click)="print()">Submit</button>
+</p-panel> 

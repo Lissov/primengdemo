@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../app/modules/shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { OrderListModule } from 'primeng/orderlist';
     HomeComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

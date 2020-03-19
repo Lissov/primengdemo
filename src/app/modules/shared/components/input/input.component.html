@@ -1,0 +1,14 @@
+<!-- <input type="text" [(ngModel)]="value" name="userName" class="form-control"> -->
+
+
+<input [(ngModel)]="value" name="userName" class="form-control" #name="ngModel" minlength="4"
+    [ngClass]="{ 'is-invalid':  name.invalid }" required>
+<div class="invalid-feedback" *ngIf="name.invalid ">
+    <p *ngIf="name.errors.required">Name is required</p>
+</div>
+<!-- <div *ngIf="name.errors.minlength">
+    Name must be at least 4 characters long.
+  </div>
+  <div *ngIf="name.errors.forbiddenName">
+    Name cannot be Bob.
+  </div> -->
